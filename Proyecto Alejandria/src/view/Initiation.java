@@ -1,28 +1,42 @@
 
 package view;
 
+import controller.InitiationController;
 import java.awt.MouseInfo;
 import java.awt.Point;
+import java.util.ArrayList;
+import model.library.Libro;
+import view.interfaces.interfaceHome;
 
 
-public class Initiation extends javax.swing.JFrame {
+public class Initiation extends javax.swing.JFrame implements interfaceHome{
     int x;
     int y;
+    InitiationController InitC;
     
-    public Initiation() {
+    public Initiation(){initComponents();}
+    
+    public Initiation(InitiationController pInitC) {
+        InitC=pInitC;
+        InitC.setViewInit(this);
         initComponents();
+        createListeners();
     }
-
+    public void  createListeners(){
+       
+        this.logginButton.addActionListener(InitC);
+        
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        logginButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        informationButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
 
@@ -43,13 +57,14 @@ public class Initiation extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Entrar");
-        jButton1.setBorder(null);
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
+        logginButton.setBackground(new java.awt.Color(153, 153, 153));
+        logginButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        logginButton.setForeground(new java.awt.Color(255, 255, 255));
+        logginButton.setText("Entrar");
+        logginButton.setActionCommand("initHomeConnection");
+        logginButton.setBorder(null);
+        logginButton.setFocusPainted(false);
+        logginButton.setFocusable(false);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -74,15 +89,15 @@ public class Initiation extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Informacion");
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setFocusable(false);
-        jButton2.setRequestFocusEnabled(false);
-        jButton2.setRolloverEnabled(false);
+        informationButton.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        informationButton.setForeground(new java.awt.Color(255, 255, 255));
+        informationButton.setText("Informacion");
+        informationButton.setBorderPainted(false);
+        informationButton.setContentAreaFilled(false);
+        informationButton.setFocusPainted(false);
+        informationButton.setFocusable(false);
+        informationButton.setRequestFocusEnabled(false);
+        informationButton.setRolloverEnabled(false);
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setFont(new java.awt.Font("Goudy Old Style", 1, 25)); // NOI18N
@@ -117,11 +132,11 @@ public class Initiation extends javax.swing.JFrame {
                 .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(202, 202, 202)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2))
+                .addComponent(informationButton))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +147,9 @@ public class Initiation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(logginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jButton2))
+                .addComponent(informationButton))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -199,12 +214,23 @@ public class Initiation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton informationButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton logginButton;
     // End of variables declaration//GEN-END:variables
+
+
+    @Override
+    public void showHome() {
+        this.setVisible(false);
+    }
+
+    @Override
+    public void showLibros(ArrayList<Libro> listaLibros) {
+        
+    }
 }
