@@ -60,7 +60,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+             e.printStackTrace();
             
         }        
     }
@@ -116,7 +116,7 @@ public class InformationStore {
             
         }        
     }
-    
+    // (pNombre VARCHAR, pApellidoP VARCHAR, pApellidoS VARCHAR, pTipPersona varchar, pTelefono NUMBER, pTipTel varchar, pCorreo Varchar)
     public void insertarPersonas(Persona pPersona){
         try {
             CallableStatement sentencia=_Conection.prepareCall("{call ADDPERSONAS(?,?,?,?,?,?,?)}");
@@ -139,11 +139,13 @@ public class InformationStore {
     public void insertarPrestacion(ArticuloPrestado pArticuloPrestado){
         try {
            
-            CallableStatement sentencia=_Conection.prepareCall("{call ADDARTICULOREVISTA(?,?)}");
+            CallableStatement sentencia=_Conection.prepareCall("{call INSERTPRESTADO(?,?)}");
             //IdGeneral
             sentencia.setInt(1, pArticuloPrestado.getIDGeneral());
             //IdPersona
             sentencia.setInt(2, pArticuloPrestado.getIDPersona());
+            
+            sentencia.execute();
             }
          catch (SQLException e) {
             e.printStackTrace();
@@ -154,19 +156,24 @@ public class InformationStore {
     //Consultas ======================================================================================
     //falta implementar
     public ArrayList<Articulo> consultaArticulosNoPrestado(){return null;
-}
+
+    }
     //falta implementar
     public ArrayList<Articulo> consultaArticulosPrestado(){return null;
-}
+
+    }
     //falta implementar
     public ArrayList<Persona> consultaPersonas(){return null;
-}
+
+    }
     //falta implementar
     public ArrayList<Pelicula> consultaPeliculas(){return null;
-}
+
+    }
     //falta implementar
     public ArrayList<Revista> consultaRevistas(){return null;
-}
+
+    }
     
     public ArrayList<Libro> consultaLibros() throws ClassNotFoundException {
             ArrayList<Libro> resultado=new ArrayList<>();
@@ -185,7 +192,6 @@ public class InformationStore {
                     nuevoLibro.setCalificacion(Integer.parseInt(datoRecibido.getString ("CALIFICACION")));
                     nuevoLibro.setImagenPortada(datoRecibido.getString ("IMAGENPORTAD"));
                     nuevoLibro.setTipoArticulo(datoRecibido.getString ("TIPART"));
-                  
                     resultado.add(nuevoLibro);
                 }
             } catch (SQLException e) {
@@ -197,14 +203,17 @@ public class InformationStore {
     //Modificaciones==================================================================================
     public void ModificarLibro(Libro pLibro){
         try {
-           
             CallableStatement sentencia=_Conection.prepareCall("{call MODIFICALIBRO(?,?,?,?,?,?,?,?)}");
             //IdGeneral
             sentencia.setString(1, pLibro.getTitulo());
             sentencia.setInt(2, pLibro.getCalificacion());
-            sentencia.setString(1, pLibro.getImagenPortada());
-            sentencia.setString(1, pLibro.getTitulo());
-            
+            sentencia.setString(3, pLibro.getImagenPortada());
+            sentencia.setString(4, pLibro.getAutor());
+            sentencia.setString(5, pLibro.getEditorial());
+            sentencia.setString(6, pLibro.getEdicion());
+            sentencia.setInt(7, pLibro.getIDgeneral());
+            sentencia.setInt(8, pLibro.getCantidadTotal());
+            sentencia.execute();
             }
          catch (SQLException e) {
             e.printStackTrace();
@@ -213,11 +222,45 @@ public class InformationStore {
     }
     
     public void ModificarPelicula(Pelicula pPelicula){
-    
+        try {
+            System.out.println(pPelicula);
+            CallableStatement sentencia=_Conection.prepareCall("{call MODIFICAPELICULA(?,?,?,?,?,?,?,?)}");
+            //IdGeneral
+            sentencia.setString(1, pPelicula.getTitulo());
+            sentencia.setInt(2, pPelicula.getCalificacion());
+            sentencia.setString(3, pPelicula.getImagenPortada());
+            sentencia.setString(4, pPelicula.getDirector());
+            sentencia.setDate(5, pPelicula.getFechaEstreno());
+            sentencia.setString(6, pPelicula.getEmpresa());
+            sentencia.setInt(7, pPelicula.getIDgeneral());
+            sentencia.setInt(8, pPelicula.getCantidadTotal());
+            sentencia.execute();
+            
+            
+            }
+         catch (SQLException e) {
+            e.printStackTrace();
+            
+            }  
     }
     
     public void ModificarRevista(Revista pRevista){
-    
+        try {
+            CallableStatement sentencia=_Conection.prepareCall("{call MODIFICAREVISTA(?,?,?,?,?,?,?)}");
+            //IdGeneral
+            sentencia.setString(1, pRevista.getTitulo());
+            sentencia.setInt(2, pRevista.getCalificacion());
+            sentencia.setString(3, pRevista.getImagenPortada());
+            sentencia.setDate(4, pRevista.getFechaSalida());
+            sentencia.setString(5, pRevista.getEditorial());
+            sentencia.setInt(6, pRevista.getIDgeneral());
+            sentencia.setInt(7, pRevista.getCantidadTotal());
+            sentencia.execute();
+            }
+         catch (SQLException e) {
+            e.printStackTrace();
+            
+            }  
     }
     
     //Getters

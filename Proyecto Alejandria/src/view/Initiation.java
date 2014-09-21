@@ -230,7 +230,18 @@ public class Initiation extends javax.swing.JFrame implements interfaceHome{
     }
 
     @Override
-    public void showLibros(ArrayList<Libro> listaLibros) {
-        
-    }
+    public void showLibros() {}
+
+    @Override
+    public void showRevistas() {}
+
+    @Override
+    public void showPersonas() {}
+
+    @Override
+    public void showPeliculas() {}
+
+    
+
+    
 }

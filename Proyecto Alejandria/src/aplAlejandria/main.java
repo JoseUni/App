@@ -3,16 +3,10 @@ package aplAlejandria;
 
 import controller.HomeController;
 import controller.InitiationController;
-//import java.sql.CallableStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
 import java.sql.*;
-import java.util.ArrayList;
-import static jdk.nashorn.internal.objects.NativeFunction.call;
 import model.AlejandriaEngine;
 import model.InformationStore;
 import model.library.Libro;
-import oracle.jdbc.OracleTypes;
 import view.Home;
 import view.Initiation;
 
@@ -44,24 +38,88 @@ public class main {
         init.setVisible(true);
     }
     public static void main(String args[]) throws ClassNotFoundException, SQLException {
-        //initApp();
+        initApp();
+        //pruebasApp();
+    }
+    public static void pruebasApp(){
         InformationStore x=new InformationStore();
-        /*x.initConection();
+        x.initConection();
         Libro newLibro=new Libro();
-        newLibro.setAutor("autor1");
-        newLibro.setCalificacion(1);
-        newLibro.setCantidadOcupados(0);
-        newLibro.setCantidadTotal(5);
-        newLibro.setEdicion("EdicioN1");
-        newLibro.setEditorial("Editorial1");
-        newLibro.setIDgeneral(5);
-        newLibro.setImagenPortada("imagen");
-        newLibro.setTipoArticulo(0);
-        newLibro.setTitulo("Titulo1");
-        x.insertarLibros(newLibro);*/
-        Date t;
-        t=Date.valueOf("1990-11-26");
-        System.out.println(t);
+        newLibro.setAutor("libroll");
+        newLibro.setCalificacion(879);
+        newLibro.setCantidadOcupados(123);
+        newLibro.setCantidadTotal(11);
+        newLibro.setEdicion("libroll");
+        newLibro.setEditorial("libroll");
+        newLibro.setIDgeneral(22);
+        newLibro.setImagenPortada("libroll");
+        newLibro.setTipoArticulo("cambiado");
+        newLibro.setTitulo("libroll");
+        
+        x.ModificarLibro(newLibro);
+        //x.insertarLibros(newLibro);*/
+        
+        /*Pelicula newPelicula=new Pelicula();
+        newPelicula.setTitulo("xxx");
+        newPelicula.setCalificacion(10);
+        newPelicula.setCantidadOcupados(0);
+        newPelicula.setCantidadTotal(10);
+        newPelicula.setDirector("xxx");
+        newPelicula.setEmpresa("xxx");
+        
+        newPelicula.setFechaEstreno(new Date(100,0,9));
+        newPelicula.setIDgeneral(24);
+        newPelicula.setImagenPortada(null);
+        newPelicula.setTipoArticulo("Pelicula");
+        
+        x.ModificarPelicula(newPelicula);
+        //x.insertarPeliculas(newPelicula);
+        
+        /*
+            
+        Revista newRevista=new Revista();
+         newRevista.setTitulo("Revistamodi");
+        newRevista.setCalificacion(999);
+        newRevista.setCantidadOcupados(0);
+        newRevista.setCantidadTotal(98);
+        newRevista.setEditorial("EditorialRevisy");
+        newRevista.setFechaSalida(new Date(112,10,9));
+        
+        newRevista.setIDgeneral(25);
+        newRevista.setImagenPortada(null);
+        newRevista.setTipoArticulo("Revista");
+        //x.insertarRevistas(newRevista);
+        x.ModificarRevista(newRevista);
+        //System.out.println(newRevista.toString());
+                
+        
+        /*Persona newPersona=new Persona();
+        newPersona.setNombre("Persona1");
+        newPersona.setIDPersona(56);
+        newPersona.setEmail("Persona@gmail.com");
+        newPersona.setPrimerApellido("pApellidoPersona1");
+        newPersona.setSegundoApellido("sApellidoPersona1");
+        newPersona.setTelefono("24459202");
+        newPersona.setTipo("Estudiante");//Cambiar sql
+        newPersona.setTipoTelefono("Casa");
+        
+        x.insertarPersonas(newPersona);*/
+        /*
+        ArticuloPrestado newArtPrest=new ArticuloPrestado();
+        newArtPrest.setIDGeneral(24);
+        newArtPrest.setIDPersona(0);
+        
+        x.insertarPrestacion(newArtPrest);
+        */
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
     

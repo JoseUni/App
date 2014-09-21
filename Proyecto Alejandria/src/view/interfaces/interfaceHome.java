@@ -9,6 +9,12 @@ public interface interfaceHome {
     
     public void showHome();
 
-    public void showLibros(ArrayList<Libro> listaLibros);
+    public void showLibros();
+
+    public void showRevistas();
+
+    public void showPersonas();
+
+    public void showPeliculas();
     
 }

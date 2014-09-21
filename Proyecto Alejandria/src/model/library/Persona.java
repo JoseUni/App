@@ -1,7 +1,6 @@
 
 package model.library;
 
-
 public class Persona {
     private String _Nombre;
     private String _PrimerApellido;

@@ -23,7 +23,6 @@ public class AlejandriaEngine {
     
     public void addView(interfaceHome pView){
         try{
-            System.out.println("add");
             viewList.add(pView);
         }catch(Exception e){
             e.printStackTrace();
@@ -51,14 +50,45 @@ public class AlejandriaEngine {
     }
 
     public void showLibros() {
-        ArrayList<Libro> listaLibros;
         try{
-            listaLibros=this.dataAccess.consultaLibros();
             for(int counterList=0;counterList<viewList.size();counterList++){
-                viewList.get(counterList).showLibros(listaLibros);
+                viewList.get(counterList).showLibros();
             }
         }catch(Exception e){
-            System.out.println("Problem Libros");
+            
+            e.printStackTrace();
+        }
+    }
+    
+    public void showPeliculas() {
+        try{
+            for(int counterList=0;counterList<viewList.size();counterList++){
+                viewList.get(counterList).showPeliculas();
+            }
+        }catch(Exception e){
+            
+            e.printStackTrace();
+        }
+    }
+    
+    public void showRevistas() {
+        try{
+            for(int counterList=0;counterList<viewList.size();counterList++){
+                viewList.get(counterList).showRevistas();
+            }
+        }catch(Exception e){
+            
+            e.printStackTrace();
+        }
+    }
+    
+    public void showPersonas() {
+        try{
+            for(int counterList=0;counterList<viewList.size();counterList++){
+                viewList.get(counterList).showPersonas();
+            }
+        }catch(Exception e){
+            
             e.printStackTrace();
         }
     }

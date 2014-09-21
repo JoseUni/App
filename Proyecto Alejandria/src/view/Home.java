@@ -13,10 +13,24 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
     private int x;
     private int y;
     private HomeController HomeC;
+    private PanelLibros _PanelLibro;
+    private PanelPeliculas _PanelPelicula;
+    private PanelRevistas _PanelRevistas;
+    private PanelPersonas _PanelPersonas;
+    
+    
     public Home(HomeController pHomeC) {
         HomeC=pHomeC;
         initComponents();
+        _PanelLibro=new PanelLibros(pHomeC);_PanelLibro.setVisible(true);
+        _PanelPelicula=new PanelPeliculas(pHomeC);_PanelPelicula.setVisible(true);
+        _PanelRevistas=new PanelRevistas(pHomeC);_PanelRevistas.setVisible(true);
+        _PanelPersonas=new PanelPersonas(pHomeC);_PanelPersonas.setVisible(true);
         this._BLIBROS.addActionListener(HomeC);
+        this._BPELICULAS.addActionListener(HomeC);
+        this._BPERSONAS.addActionListener(HomeC);
+        this._BREVISTAS.addActionListener(HomeC);
+        this._BBuscar.addActionListener(HomeC);
     }
    
     protected void this_mousePressed(MouseEvent e) {
@@ -32,8 +46,39 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
     public Home() {
         initComponents();
     }
-
     
+    @Override
+    public void showHome() {
+        this.setVisible(true);
+    }
+
+    @Override
+    public void showLibros() {
+        this.panelsPane.removeAll();
+        this.panelsPane.add(this._PanelLibro);
+        this.panelsPane.updateUI();
+    }
+
+    @Override
+    public void showRevistas() {
+        this.panelsPane.removeAll();
+        this.panelsPane.add(this._PanelRevistas);
+        this.panelsPane.updateUI();
+    }
+
+    @Override
+    public void showPersonas() {
+        this.panelsPane.removeAll();
+        this.panelsPane.add(this._PanelPersonas);
+        this.panelsPane.updateUI();
+    }
+
+    @Override
+    public void showPeliculas() {
+        this.panelsPane.removeAll();
+        this.panelsPane.add(this._PanelPelicula);
+        this.panelsPane.updateUI();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -42,14 +87,15 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
         ImagePane = new javax.swing.JPanel();
         ImageLabel = new javax.swing.JLabel();
         _BLIBROS = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        _BREVISTAS = new javax.swing.JButton();
+        _BPELICULAS = new javax.swing.JButton();
+        _BPERSONAS = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jButton2 = new javax.swing.JButton();
+        _EntradaText = new javax.swing.JTextField();
+        _EntradaFiltroTipo = new javax.swing.JComboBox();
+        _BBuscar = new javax.swing.JButton();
+        _EntradaFiltroBusq = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelsPane = new javax.swing.JPanel();
 
@@ -107,29 +153,32 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
         _BLIBROS.setFocusPainted(false);
         _BLIBROS.setFocusable(false);
 
-        jButton3.setBackground(new java.awt.Color(153, 153, 153));
-        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Revistas");
-        jButton3.setBorder(null);
-        jButton3.setFocusPainted(false);
-        jButton3.setFocusable(false);
+        _BREVISTAS.setBackground(new java.awt.Color(153, 153, 153));
+        _BREVISTAS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        _BREVISTAS.setForeground(new java.awt.Color(255, 255, 255));
+        _BREVISTAS.setText("Revistas");
+        _BREVISTAS.setActionCommand("ButtonRevistas");
+        _BREVISTAS.setBorder(null);
+        _BREVISTAS.setFocusPainted(false);
+        _BREVISTAS.setFocusable(false);
 
-        jButton4.setBackground(new java.awt.Color(153, 153, 153));
-        jButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Peliculas");
-        jButton4.setBorder(null);
-        jButton4.setFocusPainted(false);
-        jButton4.setFocusable(false);
+        _BPELICULAS.setBackground(new java.awt.Color(153, 153, 153));
+        _BPELICULAS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        _BPELICULAS.setForeground(new java.awt.Color(255, 255, 255));
+        _BPELICULAS.setText("Peliculas");
+        _BPELICULAS.setActionCommand("ButtonPeliculas");
+        _BPELICULAS.setBorder(null);
+        _BPELICULAS.setFocusPainted(false);
+        _BPELICULAS.setFocusable(false);
 
-        jButton5.setBackground(new java.awt.Color(153, 153, 153));
-        jButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("Personas");
-        jButton5.setBorder(null);
-        jButton5.setFocusPainted(false);
-        jButton5.setFocusable(false);
+        _BPERSONAS.setBackground(new java.awt.Color(153, 153, 153));
+        _BPERSONAS.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        _BPERSONAS.setForeground(new java.awt.Color(255, 255, 255));
+        _BPERSONAS.setText("Personas");
+        _BPERSONAS.setActionCommand("ButtonPersonas");
+        _BPERSONAS.setBorder(null);
+        _BPERSONAS.setFocusPainted(false);
+        _BPERSONAS.setFocusable(false);
 
         jButton6.setBackground(new java.awt.Color(153, 153, 153));
         jButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -144,9 +193,8 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
             }
         });
 
-        jTextField1.setText("jTextField1");
-
-        jButton2.setText("jButton2");
+        _BBuscar.setText("Buscar");
+        _BBuscar.setActionCommand("ButtonBuscar");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -154,25 +202,26 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_EntradaText, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, 0, 201, Short.MAX_VALUE)
+                .addComponent(_EntradaFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(_EntradaFiltroBusq, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(_BBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(_BBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(_EntradaText, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_EntradaFiltroTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_EntradaFiltroBusq))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         panelsPane.setBackground(new java.awt.Color(153, 153, 153));
@@ -189,9 +238,9 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ImagePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(_BLIBROS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_BREVISTAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_BPELICULAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(_BPERSONAS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,11 +262,11 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
                         .addGap(18, 18, 18)
                         .addComponent(_BLIBROS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_BPELICULAS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_BREVISTAS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(_BPERSONAS, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -293,34 +342,23 @@ public class Home extends javax.swing.JFrame implements interfaceHome{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImageLabel;
     private javax.swing.JPanel ImagePane;
+    private javax.swing.JButton _BBuscar;
     private javax.swing.JButton _BLIBROS;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton _BPELICULAS;
+    private javax.swing.JButton _BPERSONAS;
+    private javax.swing.JButton _BREVISTAS;
+    private javax.swing.JComboBox _EntradaFiltroBusq;
+    private javax.swing.JComboBox _EntradaFiltroTipo;
+    private javax.swing.JTextField _EntradaText;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelsPane;
     // End of variables declaration//GEN-END:variables
 
     
 
-    @Override
-    public void showHome() {
-        this.setVisible(true);
-    }
-
-    @Override
-    public void showLibros(ArrayList<Libro> listaLibros) {
-        for(int counter=0;counter<listaLibros.size();counter++){
-            PLibro libroNuevoPane=new PLibro(listaLibros.get(counter));
-            this.panelsPane.add(libroNuevoPane);
-            this.panelsPane.updateUI();
-        }
-        
-    }
+   
+    
 }

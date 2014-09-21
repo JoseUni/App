@@ -74,12 +74,12 @@ public class Articulo {
     public String toString(){
         String result ="";     
         result=result+"Titulo: "+_Titulo+"\n";
-        result=result+"Titulo: "+_Calificacion+"\n";
-        result=result+"Titulo: "+_IDgeneral+"\n";
-        result=result+"Titulo: "+_ImagenPortada+"\n";
-        result=result+"Titulo: "+_TipoArticulo+"\n";
-        result=result+"Titulo: "+_CantidadTotal+"\n";
-        result=result+"Titulo: "+_CantidadOcupados+"\n";
+        result=result+"Calificación: "+_Calificacion+"\n";
+        result=result+"IDGeneral: "+_IDgeneral+"\n";
+        result=result+"ImagenPortada: "+_ImagenPortada+"\n";
+        result=result+"TipoArticulo: "+_TipoArticulo+"\n";
+        result=result+"Cantidad Total: "+_CantidadTotal+"\n";
+        result=result+"Cantidad Ocupados: "+_CantidadOcupados+"\n";
         return result;
     }
     
