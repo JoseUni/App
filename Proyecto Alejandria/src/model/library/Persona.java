@@ -76,6 +76,4 @@ public class Persona {
         this._TipoTelefono = _TipoTelefono;
     }
 
-    
-    
 }
