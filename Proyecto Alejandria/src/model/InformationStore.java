@@ -95,7 +95,7 @@ public class InformationStore {
     public void insertarRevistas(Revista pRevista){
         try {
            
-            CallableStatement sentencia=_Conection.prepareCall("{call ADDARTICULOREVISTA(?,?,?,?,?,?,?)}");
+            CallableStatement sentencia=_Conection.prepareCall("{call ADDARTICULOREVISTA(?,?,?,?,?,?)}");
             //título
             sentencia.setString(1, pRevista.getTitulo());
             //calificación
@@ -116,13 +116,39 @@ public class InformationStore {
             
         }        
     }
-    //falta implementar
+    
     public void insertarPersonas(Persona pPersona){
-    
+        try {
+            CallableStatement sentencia=_Conection.prepareCall("{call ADDPERSONAS(?,?,?,?,?,?,?)}");
+            //
+            sentencia.setString(1, pPersona.getNombre());
+            sentencia.setString(2, pPersona.getPrimerApellido());
+            sentencia.setString(3, pPersona.getSegundoApellido());
+            sentencia.setString(4, pPersona.getTipo());
+            sentencia.setString(5, pPersona.getTelefono());
+            sentencia.setString(6, pPersona.getTipoTelefono());
+            sentencia.setString(7, pPersona.getEmail());
+            sentencia.execute();
+            }
+         catch (SQLException e) {
+            e.printStackTrace();
+            
+        }    
     }
-    //falta implementar
-    public void insertarPrestacion(ArticuloPrestado pArticuloPrestado){
     
+    public void insertarPrestacion(ArticuloPrestado pArticuloPrestado){
+        try {
+           
+            CallableStatement sentencia=_Conection.prepareCall("{call ADDARTICULOREVISTA(?,?)}");
+            //IdGeneral
+            sentencia.setInt(1, pArticuloPrestado.getIDGeneral());
+            //IdPersona
+            sentencia.setInt(2, pArticuloPrestado.getIDPersona());
+            }
+         catch (SQLException e) {
+            e.printStackTrace();
+            
+            }    
     }
     
     //Consultas ======================================================================================
@@ -158,7 +184,7 @@ public class InformationStore {
                     nuevoLibro.setTitulo(datoRecibido.getString ("TITULO"));
                     nuevoLibro.setCalificacion(Integer.parseInt(datoRecibido.getString ("CALIFICACION")));
                     nuevoLibro.setImagenPortada(datoRecibido.getString ("IMAGENPORTAD"));
-                    nuevoLibro.setTipoArticulo(Integer.parseInt(datoRecibido.getString ("TIPART")));
+                    nuevoLibro.setTipoArticulo(datoRecibido.getString ("TIPART"));
                   
                     resultado.add(nuevoLibro);
                 }
@@ -170,7 +196,20 @@ public class InformationStore {
     
     //Modificaciones==================================================================================
     public void ModificarLibro(Libro pLibro){
-    
+        try {
+           
+            CallableStatement sentencia=_Conection.prepareCall("{call MODIFICALIBRO(?,?,?,?,?,?,?,?)}");
+            //IdGeneral
+            sentencia.setString(1, pLibro.getTitulo());
+            sentencia.setInt(2, pLibro.getCalificacion());
+            sentencia.setString(1, pLibro.getImagenPortada());
+            sentencia.setString(1, pLibro.getTitulo());
+            
+            }
+         catch (SQLException e) {
+            e.printStackTrace();
+            
+            }  
     }
     
     public void ModificarPelicula(Pelicula pPelicula){

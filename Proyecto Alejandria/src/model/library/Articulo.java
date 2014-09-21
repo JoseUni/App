@@ -7,10 +7,18 @@ public class Articulo {
     private int _Calificacion; 
     private int _IDgeneral;
     private String _ImagenPortada;
-    private int _TipoArticulo;
+    private String _TipoArticulo;
     private int _CantidadTotal;
     private int _CantidadOcupados;
 
+    public String getTipoArticulo() {
+        return _TipoArticulo;
+    }
+
+    public void setTipoArticulo(String _TipoArticulo) {
+        this._TipoArticulo = _TipoArticulo;
+    }
+    
     public String getTitulo() {
         return _Titulo;
     }
@@ -43,13 +51,7 @@ public class Articulo {
         this._ImagenPortada = _ImagenPortada;
     }
 
-    public int getTipoArticulo() {
-        return _TipoArticulo;
-    }
-
-    public void setTipoArticulo(int _TipoArticulo) {
-        this._TipoArticulo = _TipoArticulo;
-    }
+    
 
     public int getCantidadTotal() {
         return _CantidadTotal;

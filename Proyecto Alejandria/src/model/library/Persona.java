@@ -7,10 +7,10 @@ public class Persona {
     private String _PrimerApellido;
     private String _SegundoApellido;
     private int _IDPersona;
-    private int _Tipo;
+    private String _Tipo;
     private String _Email;
     private String _Telefono;
-    private int _TipoTelefono;
+    private String _TipoTelefono;
 
     public String getNombre() {
         return _Nombre;
@@ -44,14 +44,6 @@ public class Persona {
         this._IDPersona = _IDPersona;
     }
 
-    public int getTipo() {
-        return _Tipo;
-    }
-
-    public void setTipo(int _Tipo) {
-        this._Tipo = _Tipo;
-    }
-
     public String getEmail() {
         return _Email;
     }
@@ -68,12 +60,22 @@ public class Persona {
         this._Telefono = _Telefono;
     }
 
-    public int getTipoTelefono() {
+    public String getTipo() {
+        return _Tipo;
+    }
+
+    public void setTipo(String _Tipo) {
+        this._Tipo = _Tipo;
+    }
+
+    public String getTipoTelefono() {
         return _TipoTelefono;
     }
 
-    public void setTipoTelefono(int _TipoTelefono) {
+    public void setTipoTelefono(String _TipoTelefono) {
         this._TipoTelefono = _TipoTelefono;
     }
+
+    
     
 }
