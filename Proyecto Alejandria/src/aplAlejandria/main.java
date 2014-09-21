@@ -4,9 +4,11 @@ package aplAlejandria;
 import controller.HomeController;
 import controller.InitiationController;
 import java.sql.*;
+import java.util.ArrayList;
 import model.AlejandriaEngine;
 import model.InformationStore;
 import model.library.Libro;
+import model.library.Persona;
 import view.Home;
 import view.Initiation;
 
@@ -38,13 +40,15 @@ public class main {
         init.setVisible(true);
     }
     public static void main(String args[]) throws ClassNotFoundException, SQLException {
-        initApp();
-        //pruebasApp();
+        //initApp();
+        pruebasApp();
     }
-    public static void pruebasApp(){
+    public static void pruebasApp() throws ClassNotFoundException{
         InformationStore x=new InformationStore();
         x.initConection();
-        Libro newLibro=new Libro();
+        
+        x.loadFiles();
+        /*Libro newLibro=new Libro();
         newLibro.setAutor("libroll");
         newLibro.setCalificacion(879);
         newLibro.setCantidadOcupados(123);

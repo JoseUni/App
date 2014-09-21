@@ -11,6 +11,13 @@ public class Persona {
     private String _Telefono;
     private String _TipoTelefono;
 
+    @Override
+    public String toString() {
+        return "Persona{" + "_Nombre=" + _Nombre + ", _PrimerApellido=" + _PrimerApellido + ", _SegundoApellido=" + _SegundoApellido + ", _IDPersona=" + _IDPersona + ", _Tipo=" + _Tipo + ", _Email=" + _Email + ", _Telefono=" + _Telefono + ", _TipoTelefono=" + _TipoTelefono + '}';
+    }
+    
+    
+    
     public String getNombre() {
         return _Nombre;
     }

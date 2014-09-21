@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import model.library.Articulo;
 import model.library.ArticuloPrestado;
 import model.library.Libro;
@@ -60,8 +61,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-             e.printStackTrace();
-            
+             JOptionPane.showMessageDialog(null, "Error al insertar libro");
         }        
     }
     
@@ -87,7 +87,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar películas");
             
         }        
     }
@@ -112,7 +112,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar revistas");
             
         }        
     }
@@ -131,7 +131,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al insertar Personas");
             
         }    
     }
@@ -148,7 +148,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al hacer prestación");
             
             }    
     }
@@ -162,9 +162,115 @@ public class InformationStore {
     public ArrayList<Articulo> consultaArticulosPrestado(){return null;
 
     }
-    //falta implementar
-    public ArrayList<Persona> consultaPersonas(){return null;
+    
+    public String ConsultaCorreoPersona (int pCodigoPersona){
+        String Correo = null;
+        try {
+                CallableStatement sentencia=_Conection.prepareCall("{?=call Consulta_Correo(?)}");
+                sentencia.registerOutParameter(1, OracleTypes.CURSOR);  
+                sentencia.setInt(2,pCodigoPersona);                                      
+                sentencia.executeQuery();//Realizar la llamada
+                ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
+                while (datoRecibido.next ()){
+                    Correo = datoRecibido.getString("CORREO");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        return Correo;
+    }
+    
+    public String ConsultaTipoTelefono (int pCodigoTel)
+    {
+        String TipoTelefono = null;
+        try {
+            CallableStatement sentencia=_Conection.prepareCall("{?=call Consulta_TipoTelefono(?)}");
+            sentencia.registerOutParameter(1, OracleTypes.CURSOR);  
+            sentencia.setInt(2,pCodigoTel);                                      
+            sentencia.executeQuery();//Realizar la llamada
+            ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
+            while (datoRecibido.next ()){
+                TipoTelefono = datoRecibido.getString("TIPTEL");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return TipoTelefono;
+    }
+    
+    public Persona ConsultaTelefonoPersona (int pCodigoPersona){
+        Persona PersonaTemp = new Persona();
+        try {
+                CallableStatement sentencia=_Conection.prepareCall("{?=call Consulta_Telefono(?)}");
+                sentencia.registerOutParameter(1, OracleTypes.CURSOR);  
+                sentencia.setInt(2,pCodigoPersona);                                      
+                sentencia.executeQuery();//Realizar la llamada
 
+                ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
+                while (datoRecibido.next ()){
+                    PersonaTemp.setTelefono(datoRecibido.getString("TELEFONO"));
+                    PersonaTemp.setTipoTelefono(datoRecibido.getString("TIPTEL"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        return PersonaTemp;
+    }
+    
+    public String ConsultaTipoPersona (int pTipoPersona){
+        String TipoPersonaTemp = null;
+        try {
+                CallableStatement sentencia=_Conection.prepareCall("{?=call Consulta_TipoPersona(?)}");
+                sentencia.registerOutParameter(1, OracleTypes.CURSOR);  
+                sentencia.setInt(2,pTipoPersona);                                      
+                sentencia.executeQuery();//Realizar la llamada
+                System.out.println("Objeto: " + sentencia);
+                ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
+                while (datoRecibido.next ()){
+                    TipoPersonaTemp = datoRecibido.getString("TIPPER");
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        return TipoPersonaTemp;
+    }
+    
+    public ArrayList<Persona> consultaPersonas(){//return null;
+    ArrayList<Persona> resultado=new ArrayList<>();
+            try {
+                CallableStatement sentencia=_Conection.prepareCall("{?=call Consulta_Todas_Personas()}");
+                sentencia.registerOutParameter(1, OracleTypes.CURSOR);  
+                //sentencia.setString(2,cliente1);                                            
+                sentencia.executeQuery();//Realizar la llamada
+                
+                ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
+                Persona nuevaPersona;
+                Persona TelefonoPersona;
+                while (datoRecibido.next ()){
+                    nuevaPersona=new Persona();
+                    nuevaPersona.setNombre(datoRecibido.getString("NOMBRE"));
+                    nuevaPersona.setPrimerApellido(datoRecibido.getString ("PAPELLIDO"));
+                    nuevaPersona.setSegundoApellido(datoRecibido.getString ("SAPELLIDO"));
+                    int IDPersonaTemp = datoRecibido.getInt("IDPERSONA");
+                    nuevaPersona.setIDPersona(IDPersonaTemp);
+                    int TipoPersonaTemp = datoRecibido.getInt("TIPPER");
+                    TelefonoPersona = ConsultaTelefonoPersona (IDPersonaTemp);
+                    nuevaPersona.setTelefono(TelefonoPersona.getTelefono());
+                    nuevaPersona.setEmail(ConsultaCorreoPersona (IDPersonaTemp));
+                    nuevaPersona.setTipoTelefono(ConsultaTipoTelefono (Integer.parseInt(TelefonoPersona.getTipoTelefono())));
+                    nuevaPersona.setTipo(ConsultaTipoPersona (TipoPersonaTemp));
+                    
+                    resultado.add(nuevaPersona);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }   
+            return resultado;
     }
     //falta implementar
     public ArrayList<Pelicula> consultaPeliculas(){return null;
@@ -185,13 +291,20 @@ public class InformationStore {
                 System.out.println("Objeto: " + sentencia);
                 ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
                 Libro nuevoLibro;
+                
                 while (datoRecibido.next ()){
+                    System.out.println("1");
                     nuevoLibro=new Libro();
                     nuevoLibro.setIDgeneral(datoRecibido.getInt ("IDGENERAL"));
                     nuevoLibro.setTitulo(datoRecibido.getString ("TITULO"));
-                    nuevoLibro.setCalificacion(Integer.parseInt(datoRecibido.getString ("CALIFICACION")));
+                    nuevoLibro.setCalificacion(datoRecibido.getInt ("CALIFICACION"));
+                    nuevoLibro.setTipoArticulo("Libro");
+                    nuevoLibro.setCantidadTotal(datoRecibido.getInt ("CANTIDADTOTAL"));
+                    nuevoLibro.setCantidadOcupados(datoRecibido.getInt ("CANTIDADOCUPADOS"));
                     nuevoLibro.setImagenPortada(datoRecibido.getString ("IMAGENPORTAD"));
-                    nuevoLibro.setTipoArticulo(datoRecibido.getString ("TIPART"));
+                    nuevoLibro.setEditorial(datoRecibido.getString ("EDITORIAL"));
+                    nuevoLibro.setEdicion(datoRecibido.getString ("EDICION"));
+                    nuevoLibro.setAutor(datoRecibido.getString ("AUTOR"));
                     resultado.add(nuevoLibro);
                 }
             } catch (SQLException e) {
@@ -216,7 +329,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al Modificar Libro");
             
             }  
     }
@@ -239,7 +352,7 @@ public class InformationStore {
             
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al Modificar Película");
             
             }  
     }
@@ -258,7 +371,7 @@ public class InformationStore {
             sentencia.execute();
             }
          catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error al Modificar Revista");
             
             }  
     }
@@ -266,6 +379,18 @@ public class InformationStore {
     //Getters
     public Connection getConection() {
         return _Conection;
+    }
+    //Cargar Personas
+    
+    
+    
+    public void loadFiles() {
+        ArrayList<Persona> lista=CargarInfoPersonas.CargarInfoPersonas("C:\\Documents and Settings\\Adriana\\My Documents\\NetBeansProjects\\App\\Proyecto Alejandria\\src\\model\\library\\files\\Personas.txt");
+        for(int contador=0; contador<lista.size();contador++){
+            this.insertarPersonas(lista.get(contador));
+        }
+        //otros inserts
+        
     }
     
 }

@@ -13,6 +13,7 @@ public class AlejandriaEngine {
     public AlejandriaEngine(){
         dataAccess=new InformationStore();
         viewList=new ArrayList();
+        dataAccess.loadFiles();
     }
     
     public void initConection(){
