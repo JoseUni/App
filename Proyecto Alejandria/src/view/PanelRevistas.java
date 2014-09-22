@@ -26,12 +26,14 @@ public class PanelRevistas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         _PanelesRevista = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(673, 437));
         setMinimumSize(new java.awt.Dimension(673, 437));
         setPreferredSize(new java.awt.Dimension(673, 437));
 
         jLabel1.setText("Revistas");
 
+        _ADDRevista.setBackground(new java.awt.Color(204, 204, 204));
         _ADDRevista.setText("Añadir Revista");
         _ADDRevista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -39,6 +41,7 @@ public class PanelRevistas extends javax.swing.JPanel {
             }
         });
 
+        _PanelesRevista.setBackground(new java.awt.Color(102, 102, 102));
         _PanelesRevista.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(_PanelesRevista);
 
@@ -82,4 +85,9 @@ public class PanelRevistas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    void showAllRevistas() {
+    
+    
+    }
 }

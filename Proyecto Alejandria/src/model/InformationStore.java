@@ -156,11 +156,41 @@ public class InformationStore {
     //Consultas ======================================================================================
     //falta implementar
     public ArrayList<Articulo> consultaArticulosNoPrestado(){return null;
-
+        
     }
     //falta implementar
     public ArrayList<Articulo> consultaArticulosPrestado(){return null;
 
+    }
+    
+    public ArrayList<Libro> consultaLibroTitulo (String pTitulo){
+    ArrayList<Libro> resultado = new ArrayList<>();
+        try {
+                CallableStatement sentencia=_Conection.prepareCall("{?=call Consulta_Libros_T(?)}");
+                sentencia.registerOutParameter(1, OracleTypes.CURSOR);  
+                sentencia.setString(2,pTitulo);                                      
+                sentencia.executeQuery();//Realizar la llamada
+                ResultSet datoRecibido = (ResultSet)sentencia.getObject (1);
+                Libro LibroTemp;
+                while (datoRecibido.next ()){
+                    LibroTemp = new Libro();
+                    //nuevaPersona.setNombre(datoRecibido.getString("NOMBRE"));
+                    LibroTemp.setEditorial(datoRecibido.getString("EDITORIAL"));
+                    LibroTemp.setTipoArticulo(datoRecibido.getString("TIPART"));
+                    LibroTemp.setTitulo(datoRecibido.getString("TITULO"));
+                    LibroTemp.setCalificacion(datoRecibido.getInt("CALIDFICAION"));
+                    LibroTemp.setIDgeneral(datoRecibido.getInt("IDGENERAL"));
+                    LibroTemp.setImagenPortada(datoRecibido.getString("IMAGENPARTAD"));
+                    LibroTemp.setCantidadTotal(datoRecibido.getInt("CANTIDADTOTAL"));
+                    LibroTemp.setCantidadOcupados(datoRecibido.getInt("CANTIDADOCUPADOS"));
+                    LibroTemp.setEdicion(datoRecibido.getString("EDICION"));
+                    resultado.add(LibroTemp);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return null;
+            }
+        return resultado;
     }
     
     public String ConsultaCorreoPersona (int pCodigoPersona){
@@ -375,14 +405,11 @@ public class InformationStore {
             
             }  
     }
-    
     //Getters
     public Connection getConection() {
         return _Conection;
     }
     //Cargar Personas
-    
-    
     
     public void loadFiles() {
         ArrayList<Persona> lista=CargarInfoPersonas.CargarInfoPersonas("C:\\Documents and Settings\\Adriana\\My Documents\\NetBeansProjects\\App\\Proyecto Alejandria\\src\\model\\library\\files\\Personas.txt");

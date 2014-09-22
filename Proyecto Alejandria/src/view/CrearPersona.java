@@ -5,6 +5,15 @@
  */
 package view;
 
+import java.util.Properties;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
 import model.AlejandriaEngine;
 import model.library.Persona;
 
@@ -15,7 +24,13 @@ import model.library.Persona;
 public class CrearPersona extends javax.swing.JDialog {
 
     private String path;
-
+    public static String Username = "kevinmenar@gmail.com";
+    public static String PassWord = "1993kevinmen24514179";
+    String Mensage = "Creación de Registro completa";
+    String To = "";
+    String Subject = "Alejandría";
+    
+    
     private AlejandriaEngine model;
     public void setModel(AlejandriaEngine model) {
         this.model = model;
@@ -172,10 +187,45 @@ public class CrearPersona extends javax.swing.JDialog {
         if(telselected==2){newPersona.setTipoTelefono("Casa");}
         else{newPersona.setTipoTelefono("Celular");}
         newPersona.setEmail(this.lblEmail.getText());
-        
+        To=newPersona.getEmail();
         this.model.getDataAccess().insertarPersonas(newPersona);
+        
+        
+        SendMail();
     }//GEN-LAST:event_jButton1ActionPerformed
+    
+    
 
+    public void SendMail() {
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(Username, PassWord);
+                    }
+                });
+
+        try {
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(Username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(To));
+            message.setSubject(Subject);
+            message.setText(Mensage);
+
+            Transport.send(message);
+            JOptionPane.showMessageDialog(this, "Su mensaje ha sido enviado");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -7,6 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import model.AlejandriaEngine;
 import model.InformationStore;
+import model.library.ArticuloPrestado;
 import model.library.Libro;
 import model.library.Persona;
 import view.Home;
@@ -40,14 +41,14 @@ public class main {
         init.setVisible(true);
     }
     public static void main(String args[]) throws ClassNotFoundException, SQLException {
-        //initApp();
-        pruebasApp();
+        initApp();
+       // pruebasApp();
     }
     public static void pruebasApp() throws ClassNotFoundException{
         InformationStore x=new InformationStore();
         x.initConection();
         
-        x.loadFiles();
+        //x.loadFiles();
         /*Libro newLibro=new Libro();
         newLibro.setAutor("libroll");
         newLibro.setCalificacion(879);
@@ -108,13 +109,13 @@ public class main {
         newPersona.setTipoTelefono("Casa");
         
         x.insertarPersonas(newPersona);*/
-        /*
+        
         ArticuloPrestado newArtPrest=new ArticuloPrestado();
-        newArtPrest.setIDGeneral(24);
-        newArtPrest.setIDPersona(0);
+        newArtPrest.setIDGeneral(49);
+        newArtPrest.setIDPersona(22);
         
         x.insertarPrestacion(newArtPrest);
-        */
+        
         
         
         

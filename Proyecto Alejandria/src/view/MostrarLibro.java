@@ -5,6 +5,13 @@
  */
 package view;
 
+import java.io.File;
+import javax.swing.JOptionPane;
+import model.AlejandriaEngine;
+import model.library.ArticuloPrestado;
+import model.library.Libro;
+import model.library.Persona;
+
 /**
  *
  * @author Adriana
@@ -14,10 +21,42 @@ public class MostrarLibro extends javax.swing.JPanel {
     /**
      * Creates new form MostrarLibro
      */
-    public MostrarLibro() {
+    private Persona _Persona;
+    private Libro _Libro;
+    private AlejandriaEngine _Model;
+    
+    public MostrarLibro(Libro pLibro) {
         initComponents();
+        this.lblTitulo.setText(this.lblTitulo.getText()+pLibro.getTitulo());
+        this.lblCalificacion.setText(this.lblCalificacion.getText()+pLibro.getCalificacion());
+        int num=pLibro.getCantidadTotal()-pLibro.getCantidadOcupados();
+        this.lblCantidadDisponible.setText(this.lblCantidadDisponible.getText()+num);
+        this.lblEdicion.setText(this.lblEdicion.getText()+pLibro.getEdicion());
+        this.lblEditorial.setText(this.lblEditorial.getText()+pLibro.getEditorial());
+        this.lblOcupados.setText(this.lblOcupados.getText()+pLibro.getCantidadOcupados());
+        this.lblAutor.setText(this.lblAutor.getText()+pLibro.getAutor());
+        javax.swing.ImageIcon imagen=new javax.swing.ImageIcon(pLibro.getImagenPortada());
+        this._LImage.setIcon(imagen);
+        this.ButtonAlquilar.setVisible(false);
     }
-
+    
+    public MostrarLibro(Libro pLibro,Persona pPersona,AlejandriaEngine pModel) {
+        initComponents();
+        this.lblTitulo.setText(this.lblTitulo.getText()+pLibro.getTitulo());
+        this.lblCalificacion.setText(this.lblCalificacion.getText()+pLibro.getCalificacion());
+        int num=pLibro.getCantidadTotal()-pLibro.getCantidadOcupados();
+        this.lblCantidadDisponible.setText(this.lblCantidadDisponible.getText()+num);
+        this.lblEdicion.setText(this.lblEdicion.getText()+pLibro.getEdicion());
+        this.lblEditorial.setText(this.lblEditorial.getText()+pLibro.getEditorial());
+        this.lblOcupados.setText(this.lblOcupados.getText()+pLibro.getCantidadOcupados());
+        this.lblAutor.setText(this.lblAutor.getText()+pLibro.getAutor());
+        javax.swing.ImageIcon imagen=new javax.swing.ImageIcon(pLibro.getImagenPortada());
+        this._LImage.setIcon(imagen);
+        this._BEditar.setVisible(false);
+        _Persona=pPersona;
+        _Libro=pLibro;
+        _Model=pModel;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,18 +66,72 @@ public class MostrarLibro extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        _LImage = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        lblCantidadDisponible = new javax.swing.JLabel();
+        lblOcupados = new javax.swing.JLabel();
+        lblCalificacion = new javax.swing.JLabel();
+        lblAutor = new javax.swing.JLabel();
+        lblEditorial = new javax.swing.JLabel();
+        lblEdicion = new javax.swing.JLabel();
+        _BEditar = new javax.swing.JButton();
+        ButtonAlquilar = new javax.swing.JButton();
 
-        jLabel1.setText("jLabel1");
+        setBackground(new java.awt.Color(204, 204, 204));
+        setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        setMaximumSize(new java.awt.Dimension(464, 250));
+        setMinimumSize(new java.awt.Dimension(464, 250));
 
-        jLabel2.setText("Titulo:");
+        jPanel1.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel1.setMaximumSize(new java.awt.Dimension(136, 191));
+        jPanel1.setMinimumSize(new java.awt.Dimension(136, 191));
 
-        jLabel3.setText("Autor:");
+        _LImage.setBackground(new java.awt.Color(204, 204, 204));
+        _LImage.setMaximumSize(new java.awt.Dimension(116, 169));
+        _LImage.setMinimumSize(new java.awt.Dimension(116, 169));
+        _LImage.setPreferredSize(new java.awt.Dimension(116, 169));
 
-        jLabel4.setText("Disponibles:");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(_LImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(_LImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        lblTitulo.setText("Titulo:");
+
+        lblCantidadDisponible.setText("Cantidad Disponible:");
+
+        lblOcupados.setText("Ocupados:");
+
+        lblCalificacion.setText("Calificación:");
+
+        lblAutor.setText("Autor:");
+
+        lblEditorial.setText("Editorial:");
+
+        lblEdicion.setText("Edición:");
+
+        _BEditar.setBackground(new java.awt.Color(204, 204, 204));
+        _BEditar.setText("Editar");
+
+        ButtonAlquilar.setText("Alquilar");
+        ButtonAlquilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonAlquilarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -46,35 +139,77 @@ public class MostrarLibro extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(_BEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(224, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCalificacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblOcupados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEditorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblAutor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEdicion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCantidadDisponible, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(ButtonAlquilar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(_BEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ButtonAlquilar))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(lblCantidadDisponible, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lblOcupados, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblCalificacion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblEditorial, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(lblEdicion, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ButtonAlquilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonAlquilarActionPerformed
+        
+            System.out.println("ID GENERAL"+this._Libro.getIDgeneral());
+            System.out.println("ID PERSONA"+this._Persona.getIDPersona());
+            ArticuloPrestado nuevaPrestacion=new ArticuloPrestado();
+            nuevaPrestacion.setIDGeneral(this._Libro.getIDgeneral());
+            nuevaPrestacion.setIDPersona(this._Persona.getIDPersona());
+            System.out.println(nuevaPrestacion);
+            this._Model.getDataAccess().insertarPrestacion(nuevaPrestacion);
+            this._Model.showPersonas();
+    }//GEN-LAST:event_ButtonAlquilarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton ButtonAlquilar;
+    private javax.swing.JButton _BEditar;
+    private javax.swing.JLabel _LImage;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblAutor;
+    private javax.swing.JLabel lblCalificacion;
+    private javax.swing.JLabel lblCantidadDisponible;
+    private javax.swing.JLabel lblEdicion;
+    private javax.swing.JLabel lblEditorial;
+    private javax.swing.JLabel lblOcupados;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }

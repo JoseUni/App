@@ -27,12 +27,14 @@ public class PanelPeliculas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         _PanelesPelicula = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(673, 437));
         setMinimumSize(new java.awt.Dimension(673, 437));
         setPreferredSize(new java.awt.Dimension(673, 437));
 
         jLabel1.setText("Peliculas");
 
+        _ADDPelicula.setBackground(new java.awt.Color(204, 204, 204));
         _ADDPelicula.setText("Añadir");
         _ADDPelicula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -40,6 +42,7 @@ public class PanelPeliculas extends javax.swing.JPanel {
             }
         });
 
+        _PanelesPelicula.setBackground(new java.awt.Color(102, 102, 102));
         _PanelesPelicula.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(_PanelesPelicula);
 
@@ -53,8 +56,8 @@ public class PanelPeliculas extends javax.swing.JPanel {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
-                        .addComponent(_ADDPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
+                        .addComponent(_ADDPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -63,9 +66,9 @@ public class PanelPeliculas extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(_ADDPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(_ADDPelicula, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 384, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                 .addGap(6, 6, 6))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -83,4 +86,8 @@ public class PanelPeliculas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    void showAllPeliculas() {
+    
+    }
 }

@@ -2,6 +2,9 @@
 package view;
 
 import controller.HomeController;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import model.library.Persona;
 
 
 public class PanelPersonas extends javax.swing.JPanel {
@@ -27,12 +30,14 @@ public class PanelPersonas extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         _PanelesPersona = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(673, 437));
         setMinimumSize(new java.awt.Dimension(673, 437));
         setPreferredSize(new java.awt.Dimension(673, 437));
 
         jLabel1.setText("Personas");
 
+        _ADDPersona.setBackground(new java.awt.Color(204, 204, 204));
         _ADDPersona.setText("Añadir");
         _ADDPersona.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -40,6 +45,7 @@ public class PanelPersonas extends javax.swing.JPanel {
             }
         });
 
+        _PanelesPersona.setBackground(new java.awt.Color(102, 102, 102));
         _PanelesPersona.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(_PanelesPersona);
 
@@ -83,4 +89,26 @@ public class PanelPersonas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    public JPanel getPanelesPersona() {
+        return _PanelesPersona;
+    }
+
+    public void setPanelesPersona(JPanel _PanelesPersona) {
+        this._PanelesPersona = _PanelesPersona;
+    }
+    
+    public void showAllPersonas(){
+        try{
+            this._PanelesPersona.removeAll();
+            ArrayList<Persona> lista=this.HomeC.getModel().getDataAccess().consultaPersonas();
+            for(int contador=0;contador<lista.size();contador++){
+                MostrarPersona newPanelPersona=new MostrarPersona(lista.get(contador),this.HomeC.getModel(),this);
+                this._PanelesPersona.add(newPanelPersona);
+                this._PanelesPersona.updateUI();
+            }
+        }catch(Exception e){
+        
+        }
+    }
 }

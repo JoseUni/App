@@ -6,6 +6,8 @@
 package view;
 
 import controller.HomeController;
+import java.util.ArrayList;
+import model.library.Libro;
 
 /**
  *
@@ -37,11 +39,13 @@ public class PanelLibros extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         _PanelesLibro = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(204, 204, 204));
         setMaximumSize(new java.awt.Dimension(673, 437));
         setMinimumSize(new java.awt.Dimension(673, 437));
 
         jLabel1.setText("Libros");
 
+        _ADDLibro.setBackground(new java.awt.Color(204, 204, 204));
         _ADDLibro.setText("Añadir");
         _ADDLibro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,6 +53,7 @@ public class PanelLibros extends javax.swing.JPanel {
             }
         });
 
+        _PanelesLibro.setBackground(new java.awt.Color(102, 102, 102));
         _PanelesLibro.setLayout(new java.awt.GridLayout(0, 1));
         jScrollPane1.setViewportView(_PanelesLibro);
 
@@ -61,9 +66,9 @@ public class PanelLibros extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 558, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 535, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(_ADDLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(_ADDLibro, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -71,9 +76,9 @@ public class PanelLibros extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
                     .addComponent(_ADDLibro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -92,4 +97,20 @@ public class PanelLibros extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    public void showAllLibros() {
+        try{
+            this._PanelesLibro.removeAll();
+            ArrayList<Libro> lista=this.HomeC.getModel().getDataAccess().consultaLibros();
+            for(int contador=0;contador<lista.size();contador++){
+                MostrarLibro newPanelLibro=new MostrarLibro(lista.get(contador));
+                this._PanelesLibro.add(newPanelLibro);
+                this._PanelesLibro.updateUI();
+            }
+        }catch(Exception e){
+        
+        }
+    }
+
+    
 }
